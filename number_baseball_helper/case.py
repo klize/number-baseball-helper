@@ -37,5 +37,6 @@ def _make_name_to_case(ndigit: int):
     pass
 
 
-def get_name(case: Case):
-   return _case_to_name.get(case)
+def case_to_name(ndigit: int):
+    return _make_case_to_name(ndigit) if _case_to_name == {} else _case_to_name
+
