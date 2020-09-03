@@ -8,14 +8,6 @@ _case_to_name = {}
 _name_to_case = {}
 
 
-def make_cases(ndigit: int):
-    global _case_to_name
-    global _name_to_case
-
-    _case_to_name = _make_case_to_name(ndigit)
-    _name_to_case = _make_name_to_case(ndigit)
-
-
 def _make_case_to_name(ndigit: int):
     cton = {}
     for strike in range(ndigit):
@@ -31,10 +23,6 @@ def _make_case_to_name(ndigit: int):
 
             cton.update({case: name})
     return cton
-
-
-def _make_name_to_case(ndigit: int):
-    pass
 
 
 def case_to_name(ndigit: int):

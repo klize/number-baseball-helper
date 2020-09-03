@@ -13,6 +13,10 @@ class NPC:
 
         self._number_str = None
 
+    @property
+    def ndigit(self):
+        return self._ndigit
+
     def _think_number(self):
         number = random.randrange(0, 10 ** self._ndigit)
         number_str = f"{number:0{self._ndigit}d}"

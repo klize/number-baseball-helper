@@ -42,31 +42,6 @@ class NumberBaseballHelper:
     def choose_next_guess(self):
         return random.choice(self.show_candidate())
 
-    def start_console(self):
-        while True:
-            a = input("[guess] [strike] [ball]>> ").split(" ")
-
-            if a[0] == "q":
-                break
-
-            if a[0] == "show":
-                print(self.show_candidate())
-                continue
-
-            if a[0] == "choice":
-                print(self.choose_next_guess())
-                continue
-
-            if len(a) != 3 or len(a[0]) != self._ndigit or len(set(a[0])) != \
-                    self._ndigit:
-                print("wrong input")
-                continue
-
-            guess_number_str = a[0]
-            strike, ball = map(int, a[1:])
-            result = Case(strike, ball, ndigit=self.ndigit)
-            self.scan_candidate(guess_number_str, result)
-
 
 class Candidate:
     def __init__(self, number_str):

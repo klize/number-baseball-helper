@@ -2,35 +2,14 @@ from __future__ import print_function, unicode_literals
 
 import argparse
 import sys
-import regex
 
 from PyInquirer import prompt
-from prompt_toolkit.validation import Validator, ValidationError
 
-from number_baseball_helper.case import Case, case_to_name
+from number_baseball_helper.cmd.input_validation import \
+    get_guess_number_validator
+from number_baseball_helper.cmd import dummy_func
+from number_baseball_helper.case import case_to_name
 from number_baseball_helper.helper import NumberBaseballHelper
-
-
-class PropertyMixIn:
-    def __init__(self, property_name, property_value):
-        setattr(self, property_name, property_value)
-
-
-def get_guess_number_validator(ndigit: int):
-    class GuessNumberValidator(Validator):
-        _ndigit = ndigit
-
-        def validate(self, document):
-            ndigit_regex = "^\\d{" + f"{self._ndigit}" + "}$"
-            ok = regex.match(
-                ndigit_regex,
-                document.text)
-            if not ok:
-                raise ValidationError(
-                    message='Please enter a valid guess number string',
-                    cursor_position=len(document.text))
-
-    return GuessNumberValidator
 
 
 def console_prompt(app: NumberBaseballHelper):
@@ -88,7 +67,6 @@ def console_prompt(app: NumberBaseballHelper):
 def console(app: NumberBaseballHelper):
     while True:
         answers = console_prompt(app=app)
-        print(answers)
 
         command = answers.pop('command')
         argument = answers
@@ -102,10 +80,6 @@ def console(app: NumberBaseballHelper):
             print(return_value)
 
 
-def dummy_func():
-    yield
-
-
 def define_get_args(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument("--ndigit", type=int, default=4)
@@ -117,7 +91,6 @@ def main(argv=None):
     args = define_get_args(argv)
 
     helper = NumberBaseballHelper(ndigit=args.ndigit)
-    # helper.start_console()
     console(app=helper)
 
 
