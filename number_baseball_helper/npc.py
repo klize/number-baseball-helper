@@ -30,7 +30,10 @@ class NPC:
         self._number_str = number_str
 
     def check_number(self, number_str: str):
-        return check_case(self._number_str, number_str, self._ndigit)
+        case = check_case(self._number_str, number_str, self._ndigit)
+        if case == Case(self._ndigit, 0, self._ndigit):
+            return "found"
+        return case
 
     def start_console(self):
         self.think_number()

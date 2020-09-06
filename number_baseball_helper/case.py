@@ -3,6 +3,9 @@ class Case(tuple):
         assert strike + ball <= ndigit
         return tuple.__new__(cls, (strike, ball))
 
+    def __str__(self):
+        return f"{self[0]} strike {self[1]} ball"
+
 
 _case_to_name = {}
 _name_to_case = {}
