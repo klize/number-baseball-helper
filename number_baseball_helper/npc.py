@@ -13,6 +13,10 @@ class NPC:
 
         self._number_str = None
 
+    @property
+    def ndigit(self):
+        return self._ndigit
+
     def _think_number(self):
         number = random.randrange(0, 10 ** self._ndigit)
         number_str = f"{number:0{self._ndigit}d}"
@@ -26,7 +30,10 @@ class NPC:
         self._number_str = number_str
 
     def check_number(self, number_str: str):
-        return check_case(self._number_str, number_str, self._ndigit)
+        case = check_case(self._number_str, number_str, self._ndigit)
+        if case == Case(self._ndigit, 0, self._ndigit):
+            return "found"
+        return case
 
     def start_console(self):
         self.think_number()
